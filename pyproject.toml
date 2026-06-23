@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "safebo-tanks"
+version = "0.1.0"
+description = "Safe Bayesian optimization for coupled-tank PI auto-tuning"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=2.0,<3",
+  "scipy>=1.14,<2",
+  "scikit-learn>=1.6,<2",
+  "matplotlib>=3.9,<4",
+  "pandas>=2.2,<3",
+  "imageio>=2.37,<3",
+  "imageio-ffmpeg>=0.6,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9,<10",
+  "ruff>=0.12,<1",
+]
+
+[project.scripts]
+safebo-experiment = "safebo_tanks.experiment:main"
+safebo-ablation = "safebo_tanks.ablation:main"
+safebo-deployment-ablation = "safebo_tanks.deployment_ablation:main"
+safebo-demo = "safebo_tanks.demo:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

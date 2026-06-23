@@ -1,0 +1,31 @@
+{
+  "seeds": 20,
+  "base_config": {
+    "budget": 30,
+    "num_candidates": 2048,
+    "beta_objective": 1.8,
+    "beta_safety": 3.0,
+    "safety_buffer": 0.15,
+    "expansion_weight": 0.25,
+    "max_safe_step": 0.18,
+    "expected_improvement_xi": 0.005
+  },
+  "variants": [
+    {
+      "variant": "lcb_only",
+      "unsafe_mean": 3.25,
+      "unsafe_std": 1.773340588298047,
+      "cost_mean": 0.33784940061757446,
+      "cost_std": 0.010356410811693511
+    },
+    {
+      "variant": "trust_region",
+      "unsafe_mean": 0.9,
+      "unsafe_std": 1.2096106376585989,
+      "cost_mean": 0.3367276475557438,
+      "cost_std": 0.008804312332113446
+    }
+  ],
+  "paired_wilcoxon_trust_region_fewer_violations_p": 5.8302794038915374e-05,
+  "paired_wilcoxon_cost_difference_p": 0.1893482208251953
+}

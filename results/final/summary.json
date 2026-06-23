@@ -1,0 +1,89 @@
+{
+  "created_utc": "2026-06-22T10:25:46.116200+00:00",
+  "python": "3.12.13",
+  "platform": "macOS-15.7.7-arm64-arm-64bit",
+  "seeds": 20,
+  "qualification_scenarios_per_candidate": 5,
+  "validation_scenarios_per_run": 20,
+  "search_config": {
+    "budget": 30,
+    "num_candidates": 2048,
+    "beta_objective": 1.8,
+    "beta_safety": 3.0,
+    "safety_buffer": 0.15,
+    "expansion_weight": 0.25,
+    "max_safe_step": 0.18,
+    "expected_improvement_xi": 0.005
+  },
+  "plant_parameters": {
+    "area1": 0.015,
+    "area2": 0.015,
+    "outlet1": 4e-05,
+    "outlet2": 4.2e-05,
+    "coupling": 2.8e-05,
+    "pump_gain1": 0.000155,
+    "pump_gain2": 0.00015,
+    "pump_time_constant": 3.5,
+    "gravity": 9.81,
+    "safe_min": 0.055,
+    "safe_max": 0.36,
+    "physical_max": 0.55,
+    "max_saturation_fraction": 0.5
+  },
+  "simulation_config": {
+    "duration": 110.0,
+    "dt": 0.1,
+    "initial_height": [
+      0.14,
+      0.12
+    ],
+    "measurement_noise": 0.00075,
+    "parameter_variation": 0.02
+  },
+  "methods": [
+    {
+      "method": "manual",
+      "validation_cost_mean": 0.3527002664257774,
+      "validation_cost_std": 0.004105574422290779,
+      "validation_safe_rate": 1.0,
+      "validation_margin_mean": 0.589977819776562,
+      "online_unsafe_trials_mean": 0.0,
+      "final_best_safe_cost_mean": 0.3566841037389198
+    },
+    {
+      "method": "random",
+      "validation_cost_mean": 0.3416724646759558,
+      "validation_cost_std": 0.006218317580811048,
+      "validation_safe_rate": 0.9875,
+      "validation_margin_mean": 0.7997112331173252,
+      "online_unsafe_trials_mean": 14.85,
+      "final_best_safe_cost_mean": 0.337493869574891
+    },
+    {
+      "method": "bo",
+      "validation_cost_mean": 0.3379938728662601,
+      "validation_cost_std": 0.007505280596208824,
+      "validation_safe_rate": 0.99,
+      "validation_margin_mean": 0.5922426132150683,
+      "online_unsafe_trials_mean": 19.05,
+      "final_best_safe_cost_mean": 0.33210943784410113
+    },
+    {
+      "method": "safe_bo",
+      "validation_cost_mean": 0.3412157042872657,
+      "validation_cost_std": 0.00873870331269445,
+      "validation_safe_rate": 0.9875,
+      "validation_margin_mean": 0.6242750936582023,
+      "online_unsafe_trials_mean": 0.9,
+      "final_best_safe_cost_mean": 0.3367276475557438
+    }
+  ],
+  "derived_comparisons": {
+    "online_violation_reduction_vs_bo_percent": 95.2755905511811,
+    "online_cost_penalty_vs_bo_percent": 1.3905686455711441,
+    "paired_wilcoxon_unsafe_less_p": 4.177093299346451e-05,
+    "paired_wilcoxon_cost_greater_p": 0.0021104812622070312,
+    "certified_safe_bo_trials": 494,
+    "certified_trials_with_observed_violation": 18
+  }
+}

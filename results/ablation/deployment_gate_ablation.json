@@ -1,0 +1,24 @@
+{
+  "seeds": 20,
+  "validation_scenarios_per_seed": 20,
+  "variants": [
+    {
+      "variant": "direct_best_safe",
+      "safe_rate_mean": 0.845,
+      "safe_rate_std": 0.2051315367475734,
+      "cost_mean": 0.3362215884671707,
+      "cost_std": 0.006947986597651375,
+      "margin_mean": 0.34846187036763493
+    },
+    {
+      "variant": "qualification_gate",
+      "safe_rate_mean": 0.9875,
+      "safe_rate_std": 0.022213082915965958,
+      "cost_mean": 0.3412157042872657,
+      "cost_std": 0.007987110089403738,
+      "margin_mean": 0.6242750936582026
+    }
+  ],
+  "paired_wilcoxon_gate_safer_p": 0.0007052562366071394,
+  "paired_wilcoxon_cost_difference_p": 0.19144640357050802
+}
