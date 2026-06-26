@@ -115,7 +115,7 @@ GitHub Actions 在全新 macOS + Python 3.12 环境执行同一组检查。
 ## 演示
 
 - [45 秒数据驱动演示视频](demo/safe_bo_coupled_tank_demo.mp4)：1280×720、20 fps、H.264。
-- [系统架构图](assets/system_architecture.png)：在线安全搜索与离线资格门的职责分离。
+- [系统架构图](assets/system_architecture.svg)：在线安全搜索与离线资格门的职责分离。
 
 ## 代码结构
 

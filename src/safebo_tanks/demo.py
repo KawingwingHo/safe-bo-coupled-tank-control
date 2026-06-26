@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import shutil
 from pathlib import Path
 
-import imageio_ffmpeg
 import matplotlib
 
 matplotlib.use("Agg")
@@ -51,42 +51,9 @@ def _arrow(ax: plt.Axes, start: tuple[float, float], end: tuple[float, float], c
 
 def generate_architecture(output: Path) -> Path:
     output.mkdir(parents=True, exist_ok=True)
-    plt.rcParams["font.family"] = FONT
-    fig, ax = plt.subplots(figsize=(12, 6.5))
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.axis("off")
-    ax.text(0.5, 0.94, "安全贝叶斯优化多回路 PI 自动整定架构", ha="center", fontsize=22, weight="bold", color=COLORS["ink"])
-
-    _box(ax, (0.06, 0.57), "目标液位", "#334155")
-    _box(ax, (0.27, 0.57), "双回路 PI", "#2563eb")
-    _box(ax, (0.48, 0.57), "泵与执行器滞后", "#2563eb")
-    _box(ax, (0.69, 0.57), "耦合双水箱", "#0284c7")
-    _arrow(ax, (0.23, 0.622), (0.27, 0.622))
-    _arrow(ax, (0.44, 0.622), (0.48, 0.622))
-    _arrow(ax, (0.65, 0.622), (0.69, 0.622))
-
-    _box(ax, (0.69, 0.33), "液位与泵状态", "#0284c7")
-    _arrow(ax, (0.775, 0.57), (0.775, 0.435))
-    _arrow(ax, (0.69, 0.382), (0.355, 0.57))
-    ax.text(0.51, 0.43, "传感器反馈", ha="center", fontsize=11, color=COLORS["muted"])
-
-    _box(ax, (0.06, 0.20), "性能 GP", "#7c3aed")
-    _box(ax, (0.27, 0.20), "安全 GP + LCB", "#7c3aed")
-    _box(ax, (0.48, 0.20), "0.18 信任步长", "#059669")
-    _box(ax, (0.69, 0.20), "5 工况资格门", "#059669")
-    _arrow(ax, (0.23, 0.252), (0.27, 0.252))
-    _arrow(ax, (0.44, 0.252), (0.48, 0.252))
-    _arrow(ax, (0.65, 0.252), (0.69, 0.252))
-    _arrow(ax, (0.355, 0.305), (0.355, 0.57), color="#7c3aed")
-    ax.text(0.37, 0.47, "候选 PI 参数", fontsize=11, color="#7c3aed", rotation=90, va="center")
-    _arrow(ax, (0.775, 0.33), (0.775, 0.305), color="#7c3aed")
-
-    ax.text(0.5, 0.08, "在线阶段控制试验风险，离线资格门控制部署风险；二者不能互相替代", ha="center", fontsize=12, color=COLORS["muted"])
-    fig.tight_layout()
-    path = output / "system_architecture.png"
-    fig.savefig(path, dpi=200, bbox_inches="tight", facecolor="white")
-    plt.close(fig)
+    source = Path(__file__).resolve().parents[2] / "assets" / "system_architecture.svg"
+    path = output / "system_architecture.svg"
+    shutil.copy2(source, path)
     return path
 
 
@@ -107,6 +74,8 @@ def _gains_from_row(row: pd.Series) -> np.ndarray:
 
 
 def generate_video(results: Path, output: Path, fps: int = 20, seconds: int = 45) -> Path:
+    import imageio_ffmpeg
+
     output.mkdir(parents=True, exist_ok=True)
     plt.rcParams["font.family"] = FONT
     trials = pd.read_csv(results / "trials.csv")
